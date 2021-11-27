@@ -49,8 +49,34 @@ div.rbc-off-range-bg {
 
 .rbc-current a {
   background-color: #cc212d;
-  padding: 5px;
+  padding: 0px;
   border-radius: 50%;
   font-weight: 400;
   color: white !important;
+}
+
+div.rbc-event {
+  padding: 0;
+  background-color: white;
+  border-radius: 0px;
+  height: 100%;
+}
+
+div.rbc-row-content {
+  height: 100%;
+}
+
+div.rbc-row-content > .rbc-row:first-child {
+  height: 30px;
+}
+
+div.rbc-row-content > .rbc-row:nth-child(2) {
+  height: calc(100% - 30px);
+}
+div.rbc-row-segment {
+  padding: 0;
+}
+
+div.rbc-event-content {
+  overflow: visible !important;
 }
