@@ -57,6 +57,8 @@ export const getLegendCode = (legend) => {
 
     case "clarifying":
       return { color: "#DED2F9", code: "C" };
+    default:
+      return {};
   }
 };
 

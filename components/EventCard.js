@@ -35,7 +35,7 @@ const EventCard = ({ event }) => {
                   <div
                     key={i}
                     style={{ backgroundColor: legend.color }}
-                    className="flex justify-center items-center rounded-full h-[28px] w-[28px] text-sm"
+                    className="flex justify-center items-center rounded-full h-[28px] w-[28px] text-xs"
                   >
                     {legend.code}
                   </div>
