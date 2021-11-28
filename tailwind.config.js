@@ -4,7 +4,13 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      padding: {
+        "4/3": "133.33%",
+      },
       colors: {
+        graybody: "#555555",
+        grayLabel: "#C5C5C5",
+        grayMiddle: "#8c8c8c",
         blue: "#58ade3",
         g: "#f6f6f6",
         gray: {

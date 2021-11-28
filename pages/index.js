@@ -7,6 +7,8 @@ import DateCellWrapper from "../components/calendar/DateCellWrapper";
 import axios from "axios";
 import Event from "../components/Event";
 import { getRequestObject } from "../utils";
+import { Carousel } from "../components/Carousel";
+import EventCard from "../components/EventCard";
 
 moment.locale("en-GB");
 BigCalendar.momentLocalizer(moment);
@@ -16,7 +18,8 @@ export default function Home() {
   const [continuationtoken, setContinuationtoken] = useState();
   const [dateRanges, setDateRanges] = useState({ min: "", max: "" });
   const [hasMore, setHasMore] = useState(true);
-
+  const [posts, setPosts] = useState([]);
+  const [activeIndex, setActiveIndex] = useState(null);
   const fetchEvents = async (args) => {
     if (args) {
       const startDate = moment(args.start);
@@ -60,6 +63,7 @@ export default function Home() {
     }));
 
     setEvents((prev) => [...prev, ...uniqueDateEvents]);
+    setPosts((prev) => [...prev, ...response.data.responseobjects[0].posts]);
     setContinuationtoken(response.data.responseobjects[0].continuationtoken);
     setHasMore(!!response.data.responseobjects[0].continuationtoken);
     //set New Range
@@ -77,23 +81,46 @@ export default function Home() {
     });
   };
 
+  const handleClick = (id) => {
+    const activeIndex = posts.findIndex((item) => item.id === id);
+    setActiveIndex(activeIndex);
+  };
+
   useEffect(() => {
     fetchEvents();
   }, []);
 
   return (
-    <div className="mx-auto h-screen w-full max-w-[900px] bg-white">
-      <BigCalendar
-        events={events}
-        views={["month"]}
-        defaultDate={new Date("2020-12-04T07:00:00")}
-        components={{
-          toolbar: CalendarToolbar,
-          dateCellWrapper: DateCellWrapper,
-          event: Event,
-        }}
-        onRangeChange={fetchEvents}
-      />
-    </div>
+    <>
+      <div className="mx-auto h-screen w-full max-w-[900px] bg-white">
+        <BigCalendar
+          events={events}
+          views={["month"]}
+          defaultDate={new Date("2020-12-04T07:00:00")}
+          components={{
+            toolbar: CalendarToolbar,
+            dateCellWrapper: DateCellWrapper,
+            event: (args) => Event({ ...args, handleClick }),
+          }}
+          onRangeChange={fetchEvents}
+        />
+      </div>
+
+      {activeIndex !== null && (
+        <div
+          style={{ zIndex: 10000 }}
+          onClick={() => setActiveIndex(null)}
+          className="fixed h-screen w-screen inset-0 bg-black bg-opacity-90 flex justify-center items-center"
+        >
+          <div className="max-w-[100%] max-h-[100%] lg:max-w-[80%] lg:max-h-[80%]">
+            <Carousel initialActiveIndex={activeIndex}>
+              {posts?.map((item, i) => (
+                <EventCard event={item} key={i} />
+              ))}
+            </Carousel>
+          </div>
+        </div>
+      )}
+    </>
   );
 }

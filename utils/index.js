@@ -40,3 +40,24 @@ export const getRequestObject = (continuationtoken) => ({
     },
   ],
 });
+
+export const getLegendCode = (legend) => {
+  switch (legend) {
+    case "hair cut":
+      return { color: "#F5D1E7", code: "Cu" };
+
+    case "protein treatment":
+      return { color: "#D2E8E0", code: "Pr" };
+
+    case "hair color":
+      return { color: "#F5D1E7", code: "Hc" };
+
+    case "deep conditioning":
+      return { color: "#FEEBCD", code: "Dc" };
+
+    case "clarifying":
+      return { color: "#DED2F9", code: "C" };
+  }
+};
+
+export const truncate = (str) => str.slice(0, 150);

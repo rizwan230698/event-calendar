@@ -1,7 +1,7 @@
 const colors = ["#F193C8", "#F2948E", "#57C0F9"];
 
-const Event = ({ event }) => {
-  const image = event.allEventsOnThisDay[0].media[0].mediaurl;
+const Event = (props) => {
+  const image = props.event.allEventsOnThisDay[0].media[0].mediaurl;
 
   return (
     <div className="h-full bg-white relative z-10">
@@ -11,7 +11,7 @@ const Event = ({ event }) => {
         }}
         className="absolute flex space-x-2 pl-[10px]"
       >
-        {event.allEventsOnThisDay.map(
+        {props.event.allEventsOnThisDay.map(
           (_, i) =>
             i < 2 && (
               <div
@@ -24,7 +24,11 @@ const Event = ({ event }) => {
             )
         )}
       </div>
-      <img src={image} className="h-full w-full" />
+      <img
+        onClick={() => props.handleClick(props.event.allEventsOnThisDay[0].id)}
+        src={image}
+        className="h-full w-full"
+      />
     </div>
   );
 };
