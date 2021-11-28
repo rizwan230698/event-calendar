@@ -1,4 +1,3 @@
-import "react-big-calendar/lib/css/react-big-calendar.css";
 import React, { useEffect, useState } from "react";
 import BigCalendar from "react-big-calendar";
 import moment from "moment";
