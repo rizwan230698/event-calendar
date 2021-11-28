@@ -2,9 +2,9 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import React, { useEffect, useState } from "react";
 import BigCalendar from "react-big-calendar";
 import moment from "moment";
+import axios from "axios";
 import CalendarToolbar from "../components/calendar/Toolbar";
 import DateCellWrapper from "../components/calendar/DateCellWrapper";
-import axios from "axios";
 import Event from "../components/Event";
 import { getRequestObject } from "../utils";
 import { Carousel } from "../components/Carousel";
@@ -20,6 +20,7 @@ export default function Home() {
   const [hasMore, setHasMore] = useState(true);
   const [posts, setPosts] = useState([]);
   const [activeIndex, setActiveIndex] = useState(null);
+
   const fetchEvents = async (args) => {
     if (args) {
       const startDate = moment(args.start);
@@ -45,7 +46,6 @@ export default function Home() {
       ].calendardatetime;
 
     const events = response.data.responseobjects[0].posts;
-    console.log(response);
     const eventMapping = {};
 
     events.forEach((event) => {
@@ -108,7 +108,7 @@ export default function Home() {
 
       {activeIndex !== null && (
         <div
-          style={{ zIndex: 100000 }}
+          style={{ zIndex: 100 }}
           className="fixed h-screen w-screen inset-0 bg-black bg-opacity-95 flex justify-center items-center"
         >
           <div
@@ -121,13 +121,11 @@ export default function Home() {
               }
             }}
             tabIndex={0}
-            className="cursor-pointer absolute top-[20px] right-[20px]"
+            className="cursor-pointer absolute top-[20px] right-[20px] h-[40px] w-[40px] lg:h-[60px] lg:w-[60px]"
           >
-            <img
-              className="h-[40px] w-[40px] lg:h-[60px] lg:w-[60px]"
-              src="close-circle.svg"
-            />
+            <img className="h-full" src="close-circle.svg" />
           </div>
+
           <div className="max-w-[60%] max-h-[100%] md:max-w-[100%] lg:max-w-[75%] lg:max-h-[75%]">
             <Carousel initialActiveIndex={activeIndex}>
               {posts?.map((item, i) => (

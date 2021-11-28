@@ -61,3 +61,5 @@ export const getLegendCode = (legend) => {
 };
 
 export const truncate = (str) => str.slice(0, 150);
+
+export const colors = ["#F193C8", "#F2948E", "#57C0F9"];

@@ -5,8 +5,7 @@ const DateCellWrapper = ({ children, value }) => {
   return cloneElement(Children.only(children), {
     style: {
       ...children.style,
-      backgroundColor: day === 0 ? "#f6f6f6" : "#ffffff",
-      color: day === 0 ? "red" : "#000000",
+      backgroundColor: day === 0 ? "#f6f6f6" : "#ffffff", //check for sundays
     },
   });
 };
