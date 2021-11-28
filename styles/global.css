@@ -12,9 +12,12 @@ body {
   background-color: #f2f1ee;
 }
 
+/* Calendar styles */
+
 div.rbc-month-view {
   border: none;
 }
+
 .rbc-header + .rbc-header {
   border-left: none !important;
 }
@@ -22,9 +25,11 @@ div.rbc-month-view {
 div.rbc-header {
   text-align: end;
   padding: 5px;
-  padding-top: 0px;
   padding: 0 5px 5px;
+  font-weight: 400;
+  font-size: 16px;
 }
+
 div.rbc-date-cell {
   padding-top: 5px;
   padding-right: 5px;
@@ -32,41 +37,25 @@ div.rbc-date-cell {
 
 @media (min-width: 768px) {
   div.rbc-header {
-    text-align: end;
-    padding: 5px;
-    padding-top: 0px;
     padding: 0 10px 5px;
   }
   div.rbc-date-cell {
-    padding-top: 5px;
     padding-right: 10px;
   }
 }
 
 div.rbc-date-cell a {
-  padding: 5px;
-}
-
-.rbc-header span {
-  font-weight: 400;
-  font-size: 16px;
-}
-
-div.rbc-off-range-bg {
-  background-color: white;
-  color: inherit;
-}
-
-.rbc-date-cell.rbc-off-range {
-  color: inherit;
+  padding: 4px;
 }
 
 .rbc-current a {
   background-color: #cc212d;
-  padding: 0px;
   border-radius: 50%;
-  font-weight: 400;
   color: white !important;
+}
+
+.rbc-date-cell.rbc-off-range {
+  color: inherit;
 }
 
 div.rbc-event {
@@ -87,13 +76,27 @@ div.rbc-row-content > .rbc-row:first-child {
 div.rbc-row-content > .rbc-row:nth-child(2) {
   height: calc(100% - 30px);
 }
+
 div.rbc-row-segment {
   padding: 0;
 }
 
 div.rbc-event-content {
   overflow: visible !important;
+  height: 100%;
 }
+
+.event-dot:not(:first-child) {
+  display: none;
+}
+
+@media (min-width: 992px) {
+  .event-dot {
+    display: block !important;
+  }
+}
+
+/* Carousel styles */
 
 .swiper-slide {
   transition: transform 300ms;
@@ -101,9 +104,9 @@ div.rbc-event-content {
 
 .swiper-slide:not(.swiper-slide.swiper-slide-active) {
   transform: scale(0.85) !important;
-  position: relative;
 }
 
+/* for black wrapper on in-active carousel slides */
 .swiper-slide:not(.swiper-slide.swiper-slide-active) .event-card::after {
   content: "";
   position: absolute;
@@ -114,23 +117,10 @@ div.rbc-event-content {
   background-color: rgba(0, 0, 0, 0.7);
 }
 
-.swiper-slide-active {
-  z-index: 10;
-}
-
-.event-ball:not(:first-child) {
-  display: none;
-}
-
 .swiper-container {
   overflow: visible !important;
 }
 
-@media (min-width: 992px) {
-  .event-ball {
-    display: block !important;
-  }
-}
 @media (min-width: 768px) {
   .swiper-container {
     overflow: hidden !important;

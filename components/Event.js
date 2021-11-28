@@ -14,14 +14,14 @@ const Event = ({ event, handleClick }) => (
           style={{
             backgroundColor: colors[i],
           }}
-          className="h-[15px] w-[15px] rounded-full event-ball"
+          className="h-[15px] w-[15px] rounded-full event-dot"
         />
       ))}
     </div>
     <img
       onClick={() => handleClick(event.allEventsOnThisDay[0].id)}
       src={event.allEventsOnThisDay[0].media[0].mediaurl}
-      className="h-full w-full"
+      className=" h-full w-full"
     />
   </div>
 );
