@@ -14,14 +14,13 @@ moment.locale("en-GB");
 BigCalendar.momentLocalizer(moment);
 
 export default function Home() {
-  const [events, setEvents] = useState([]);
-  const [continuationtoken, setContinuationtoken] = useState();
-  const [dateRanges, setDateRanges] = useState({ min: "", max: "" });
-  const [hasMore, setHasMore] = useState(true);
   const [posts, setPosts] = useState([]);
+  const [continuationtoken, setContinuationtoken] = useState();
+  const [hasMore, setHasMore] = useState(true);
+  const [dateRanges, setDateRanges] = useState({ min: "", max: "" });
   const [activeIndex, setActiveIndex] = useState(null);
 
-  const fetchEvents = async (args) => {
+  const fetchPosts = async (args) => {
     if (args) {
       const startDate = moment(args.start);
       const endDate = moment(args.end);
@@ -45,24 +44,6 @@ export default function Home() {
         response.data.responseobjects[0].posts.length - 1
       ].calendardatetime;
 
-    const events = response.data.responseobjects[0].posts;
-    const eventMapping = {};
-
-    events.forEach((event) => {
-      eventMapping[event.calendardatetime] = eventMapping[
-        event.calendardatetime
-      ]
-        ? [...eventMapping[event.calendardatetime], event]
-        : [event];
-    });
-
-    const uniqueDateEvents = Object.values(eventMapping).map((item) => ({
-      start: item[0].calendardatetime,
-      end: item[0].calendardatetime,
-      allEventsOnThisDay: item,
-    }));
-
-    setEvents((prev) => [...prev, ...uniqueDateEvents]);
     setPosts((prev) => [...prev, ...response.data.responseobjects[0].posts]);
     setContinuationtoken(response.data.responseobjects[0].continuationtoken);
     setHasMore(!!response.data.responseobjects[0].continuationtoken);
@@ -81,20 +62,36 @@ export default function Home() {
     });
   };
 
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
   const handleClick = (id) => {
     const activeIndex = posts.findIndex((item) => item.id === id);
     setActiveIndex(activeIndex);
   };
 
-  useEffect(() => {
-    fetchEvents();
-  }, []);
+  const getEventList = () => {
+    const eventMapping = {};
+
+    posts.forEach((post) => {
+      eventMapping[post.calendardatetime] = eventMapping[post.calendardatetime]
+        ? [...eventMapping[post.calendardatetime], post]
+        : [post];
+    });
+
+    return Object.values(eventMapping).map((item) => ({
+      start: item[0].calendardatetime,
+      end: item[0].calendardatetime,
+      allEventsOnThisDay: item,
+    }));
+  };
 
   return (
     <>
       <div className="mx-auto h-screen w-full max-w-[900px] bg-white">
         <BigCalendar
-          events={events}
+          events={getEventList()}
           views={["month"]}
           defaultDate={new Date("2020-12-04T07:00:00")}
           components={{
@@ -102,7 +99,7 @@ export default function Home() {
             dateCellWrapper: DateCellWrapper,
             event: (args) => Event({ ...args, handleClick }),
           }}
-          onRangeChange={fetchEvents}
+          onRangeChange={fetchPosts}
         />
       </div>
 
