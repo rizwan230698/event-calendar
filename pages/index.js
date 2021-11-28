@@ -108,10 +108,26 @@ export default function Home() {
 
       {activeIndex !== null && (
         <div
-          style={{ zIndex: 10000 }}
-          onClick={() => setActiveIndex(null)}
-          className="fixed h-screen w-screen inset-0 bg-black bg-opacity-90 flex justify-center items-center"
+          style={{ zIndex: 100000 }}
+          className="fixed h-screen w-screen inset-0 bg-black bg-opacity-95 flex justify-center items-center"
         >
+          <div
+            onClick={() => setActiveIndex(null)}
+            role="button"
+            onKeyDown={(e) => {
+              if (e && e.key === "Enter") {
+                e.stopPropagation();
+                onButtonClick();
+              }
+            }}
+            tabIndex={0}
+            className="cursor-pointer absolute top-[20px] right-[20px]"
+          >
+            <img
+              className="h-[40px] w-[40px] lg:h-[60px] lg:w-[60px]"
+              src="close-circle.svg"
+            />
+          </div>
           <div className="max-w-[60%] max-h-[100%] md:max-w-[100%] lg:max-w-[75%] lg:max-h-[75%]">
             <Carousel initialActiveIndex={activeIndex}>
               {posts?.map((item, i) => (

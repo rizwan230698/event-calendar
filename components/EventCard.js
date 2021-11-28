@@ -13,7 +13,7 @@ const EventCard = ({ event }) => {
     "https://ik.imagekit.io/ojdx405rcr7/prod/54e0e04d-1672-48ff-9587-edda88c98bee_d73fa59a-e94a-4e3c-a7da-59bd1de2c0ba_E7ltHuxdl";
 
   return (
-    <div className="min-w-[65%] md:w-[260px] bg-white m-auto border border-gray-300">
+    <div className="event-card relative min-w-[65%] md:w-[260px] bg-white m-auto border border-gray-300">
       <div className="relative h-0 pb-4/3">
         <img
           src={
