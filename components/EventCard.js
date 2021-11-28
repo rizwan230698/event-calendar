@@ -6,11 +6,21 @@ import { useState } from "react";
 
 const EventCard = ({ event }) => {
   const [expand, setExpand] = useState(false);
+
+  //One image coming from backend is not valid url so replacing it
+  const isImageInValid =
+    event.media[0].mediaurl ===
+    "https://ik.imagekit.io/ojdx405rcr7/prod/54e0e04d-1672-48ff-9587-edda88c98bee_d73fa59a-e94a-4e3c-a7da-59bd1de2c0ba_E7ltHuxdl";
+
   return (
-    <div className="w-[260px] bg-white m-auto border border-gray-300">
+    <div className="min-w-[65%] md:w-[260px] bg-white m-auto border border-gray-300">
       <div className="relative h-0 pb-4/3">
         <img
-          src={event?.media[0]?.mediaurl}
+          src={
+            !isImageInValid
+              ? event?.media[0]?.mediaurl
+              : "https://images.unsplash.com/photo-1638043008244-b2b8ca402834?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2787&q=80"
+          }
           alt=""
           className="absolute inset-0 w-full h-full object-cover"
         />
@@ -20,7 +30,6 @@ const EventCard = ({ event }) => {
           <div className="flex space-x-2">
             {event?.typeofday?.map((item, i) => {
               const legend = getLegendCode(item);
-
               return (
                 i < 3 && (
                   <div

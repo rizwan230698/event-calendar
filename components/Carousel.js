@@ -18,27 +18,14 @@ export const Carousel = ({ children, initialActiveIndex = 0 }) => {
     allowTouchMove: true, // Setting this to false broke the isEnd and isBeginning of the carousel
     shouldSwiperUpdate: true,
     centeredSlides: true,
+    spaceBetween: 0,
     breakpoints: {
       1024: {
         slidesPerView: 3,
-        spaceBetween: 10,
       },
-      768: {
-        slidesPerView: 2,
+      340: {
         spaceBetween: 20,
-        slidesPerGroup: 1,
-      },
-      640: {
         slidesPerView: 1,
-        spaceBetween: 40,
-        slidesPerGroup: 1,
-        centeredSlides: true,
-      },
-      320: {
-        slidesPerView: 1,
-        spaceBetween: 40,
-        slidesPerGroup: 1,
-        centeredSlides: true,
       },
     },
   };
@@ -67,10 +54,10 @@ export const Carousel = ({ children, initialActiveIndex = 0 }) => {
     <div className="w-full h-full relative">
       {swiper && swiper.isBeginning && swiper.isEnd ? null : (
         <>
-          <div className="absolute top-1/2 z-10">
+          <div className="absolute top-1/2 -left-8 md:left-0 z-10 transform -translate-y-1/2">
             <NextPrevButton onButtonClick={goPrev} direction="left" />
           </div>
-          <div className="absolute top-1/2 right-0 z-10">
+          <div className="absolute top-1/2 -right-8 md:right-0 z-10 -translate-y-1/2">
             <NextPrevButton onButtonClick={goNext} direction="right" />
           </div>
         </>

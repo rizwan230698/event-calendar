@@ -9,20 +9,17 @@ const Event = (props) => {
         style={{
           transform: "translateY(-22px)",
         }}
-        className="absolute flex space-x-2 pl-[10px]"
+        className="absolute flex space-x-2 pl-[5px] md:pl-[10px]"
       >
-        {props.event.allEventsOnThisDay.map(
-          (_, i) =>
-            i < 2 && (
-              <div
-                key={i}
-                style={{
-                  backgroundColor: colors[i],
-                }}
-                className="h-[15px] w-[15px] rounded-full"
-              />
-            )
-        )}
+        {props.event.allEventsOnThisDay.map((_, i) => (
+          <div
+            key={i}
+            style={{
+              backgroundColor: colors[i],
+            }}
+            className="h-[15px] w-[15px] rounded-full event-ball"
+          />
+        ))}
       </div>
       <img
         onClick={() => props.handleClick(props.event.allEventsOnThisDay[0].id)}

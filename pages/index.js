@@ -112,7 +112,7 @@ export default function Home() {
           onClick={() => setActiveIndex(null)}
           className="fixed h-screen w-screen inset-0 bg-black bg-opacity-90 flex justify-center items-center"
         >
-          <div className="max-w-[100%] max-h-[100%] lg:max-w-[80%] lg:max-h-[80%]">
+          <div className="max-w-[60%] max-h-[100%] md:max-w-[100%] lg:max-w-[75%] lg:max-h-[75%]">
             <Carousel initialActiveIndex={activeIndex}>
               {posts?.map((item, i) => (
                 <EventCard event={item} key={i} />
