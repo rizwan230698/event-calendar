@@ -95,8 +95,12 @@ div.rbc-event-content {
   overflow: visible !important;
 }
 
+.swiper-slide {
+  transition: transform 300ms;
+}
+
 .swiper-slide:not(.swiper-slide.swiper-slide-active) {
-  transform: scale(0.9) !important;
+  transform: scale(0.85) !important;
   position: relative;
 }
 
