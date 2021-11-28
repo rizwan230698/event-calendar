@@ -126,7 +126,7 @@ export default function Home() {
             <img className="h-full" src="close-circle.svg" />
           </div>
 
-          <div className="max-w-[60%] max-h-[100%] md:max-w-[100%] lg:max-w-[75%] lg:max-h-[75%]">
+          <div className="max-w-[60%] max-h-[100%] sm:max-w-[100%] lg:max-w-[75%] lg:max-h-[75%]">
             <Carousel initialActiveIndex={activeIndex}>
               {posts?.map((item, i) => (
                 <EventCard event={item} key={i} />

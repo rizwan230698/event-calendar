@@ -20,7 +20,7 @@ export const Carousel = ({ children, initialActiveIndex = 0 }) => {
     centeredSlides: true,
     spaceBetween: 0,
     breakpoints: {
-      1024: {
+      640: {
         slidesPerView: 3,
       },
       340: {
@@ -54,10 +54,10 @@ export const Carousel = ({ children, initialActiveIndex = 0 }) => {
     <div className="w-full h-full relative">
       {swiper && swiper.isBeginning && swiper.isEnd ? null : (
         <>
-          <div className="absolute top-1/2 -left-8 md:left-0 z-10 transform -translate-y-1/2">
+          <div className="absolute top-1/2 -left-8 sm:left-0 z-10 transform -translate-y-1/2">
             <NextPrevButton onButtonClick={goPrev} direction="left" />
           </div>
-          <div className="absolute top-1/2 -right-8 md:right-0 z-10 -translate-y-1/2">
+          <div className="absolute top-1/2 -right-8 sm:right-0 z-10 -translate-y-1/2">
             <NextPrevButton onButtonClick={goNext} direction="right" />
           </div>
         </>

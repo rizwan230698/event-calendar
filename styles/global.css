@@ -121,7 +121,7 @@ div.rbc-event-content {
   overflow: visible !important;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .swiper-container {
     overflow: hidden !important;
   }
