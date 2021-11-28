@@ -4,8 +4,6 @@ import { NextPrevButton } from "./NextPrevButton";
 
 export const Carousel = ({ children, initialActiveIndex = 0 }) => {
   const [swiper, setSwiper] = useState();
-  const [, setIsEnd] = useState(swiper ? swiper.isEnd : false);
-  const [, setIsBeginning] = useState(swiper ? swiper.isEnd : true);
 
   const params = {
     navigation: {
@@ -15,7 +13,7 @@ export const Carousel = ({ children, initialActiveIndex = 0 }) => {
     },
     slidesPerView: 3,
     slidesPerGroup: 1,
-    allowTouchMove: true, // Setting this to false broke the isEnd and isBeginning of the carousel
+    allowTouchMove: true,
     shouldSwiperUpdate: true,
     centeredSlides: true,
     spaceBetween: 0,
@@ -24,7 +22,7 @@ export const Carousel = ({ children, initialActiveIndex = 0 }) => {
         slidesPerView: 3,
       },
       340: {
-        spaceBetween: 20,
+        spaceBetween: 5,
         slidesPerView: 1,
       },
     },
@@ -33,16 +31,12 @@ export const Carousel = ({ children, initialActiveIndex = 0 }) => {
   const goNext = () => {
     if (swiper) {
       swiper.slideNext();
-      setIsEnd(swiper.isEnd);
-      setIsBeginning(swiper.isBeginning);
     }
   };
 
   const goPrev = () => {
     if (swiper) {
       swiper.slidePrev();
-      setIsEnd(swiper.isEnd);
-      setIsBeginning(swiper.isBeginning);
     }
   };
 
@@ -52,7 +46,8 @@ export const Carousel = ({ children, initialActiveIndex = 0 }) => {
 
   return (
     <div className="w-full h-full relative">
-      {swiper && swiper.isBeginning && swiper.isEnd ? null : (
+      {/* Navigation buttons */}
+      {!swiper ? null : (
         <>
           <div className="absolute top-1/2 -left-8 sm:left-0 z-10 transform -translate-y-1/2">
             <NextPrevButton onButtonClick={goPrev} direction="left" />
@@ -63,6 +58,7 @@ export const Carousel = ({ children, initialActiveIndex = 0 }) => {
         </>
       )}
 
+      {/* Carousel */}
       <Swiper getSwiper={setSwiper} {...params}>
         {children.map((child, index) => (
           <div key={index} className="">
